@@ -54,20 +54,16 @@ public class BlockCode extends StackPane {
 
                                     HTMLLinkElement link = (HTMLLinkElement) doc.getElementById("wow");
 //                                    link.setHref("styles/intellij-light.min.css");
-                                    String them = theme.name().toLowerCase().replaceAll("_", "-");
-                                    link.setHref("styles/"+ them +".min.css");
-                                    URL s = App.class.getResource("web/languages");
+//                                    String them = theme.name().toLowerCase().replaceAll("_", "-");
+//                                    link.setHref("styles/"+ them +".min.css");
+
+                                    URL s = App.class.getResource("web/styles");
                                     File file = new File(s.getFile());
                                     for (String l : file.list()){
                                         String result = l.replaceAll("\\..*", "")
                                                 .replaceAll("-", "_");
-                                        System.out.println("" +result.toUpperCase() + ",");
+                                        System.out.println("" + result.toUpperCase() + ",");
                                     }
-
-//                                    System.out.println("head.getChildNodes().item(0).getLocalName() = " + head.getChildNodes().item(0));
-//                                    head.getChildNodes().item(1).getLocalName("<link rel=\"stylesheet\" href=\"styles/intellij-light.min.css\">");
-//                                    head.appendChild(" <link rel=\"stylesheet\" href=\"styles/github.min.css\">")
-                                    System.out.println("doc.getElementById(\"head\") = " + doc.getElementById("head"));
 
                                     if (!Objects.equals(codeType, "java")) {
                                         el.setAttribute("class", "codeType-" + codeType);

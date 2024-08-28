@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 import java.io.IOException;
 
@@ -90,18 +91,33 @@ public class App extends Application {
                                         this.text.set(text);
                                     }
                         """
-                );
+        );
 //        BlockCodeView blockCodeView = new BlockCodeView(FXCollections.observableArrayList(blockCode));
+
+        BlockCodeDeclarative declarative = new BlockCodeDeclarative();
+        declarative
+                .codeType(CodeType.JAVA)
+                .theme(Theme.$3024)
+                .content("""
+                        BlockCodeDeclarative declarative = new BlockCodeDeclarative();
+                                                       declarative
+                                                               .codeType(CodeType.HTML)
+                                                               
+                """);
+        declarative.build();
 
         Tab tab = new Tab("java", blockCode);
         Tab tabJavascript = new Tab("java", blockCodeJavascript);
         Tab tabCodeHtml = new Tab("java", blockCodeHtml);
-        TabPane tabView = new TabPane(tab, tabJavascript, tabCodeHtml);
+        Tab deck = new Tab("Declarative Style", declarative);
+        TabPane tabView = new TabPane(tab, tabJavascript, tabCodeHtml, deck);
 
         Scene scene = new Scene(tabView, 800, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        ScenicView.show(stage.getScene());
     }
 
     public static void main(String[] args) {
