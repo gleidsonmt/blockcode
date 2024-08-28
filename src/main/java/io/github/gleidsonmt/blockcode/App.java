@@ -78,24 +78,13 @@ public class App extends Application {
                 .build();
 
         BlockCode blockCode = new BlockCode()
+                .theme(Theme.GITHUB)
+                .codeType(CodeType.JAVASCRIPT)
                 .content(
                 """
-                        @Override
-                        protected Skin<?> createDefaultSkin() {
-                            return new BlockCodeViewSkin(this);
-                        }
-
-                        public String getText() {
-                            return text.get();
-                        }
-
-                        public StringProperty textProperty() {
-                            return text;
-                        }
-
-                        public void setText(String text) {
-                            this.text.set(text);
-                        }
+                        function hello() { 
+                            console.log('Hello') 
+                        };
                         """
         ).build();
 
