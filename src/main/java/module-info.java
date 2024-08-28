@@ -5,6 +5,8 @@ module io.github.gleidsonmt.blockcode {
     requires java.desktop;
     requires jdk.xml.dom;
 
+    requires scenicView;
+
     opens io.github.gleidsonmt.blockcode to javafx.fxml;
     exports io.github.gleidsonmt.blockcode;
 }
