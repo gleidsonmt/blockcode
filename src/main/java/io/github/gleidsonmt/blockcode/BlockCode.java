@@ -15,6 +15,7 @@ import java.util.Objects;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  27/08/2024
  */
+@SuppressWarnings("unused")
 public class BlockCode extends StackPane {
 
     private Theme theme = Theme.GITHUB;
