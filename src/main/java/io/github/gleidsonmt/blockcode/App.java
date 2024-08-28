@@ -13,7 +13,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        BlockCode blockCodeHtml = new BlockCode(
+        BlockCode blockCodeHtml = new BlockCode()
+                .content(
                 """
                         <!doctype html>
                         <html lang="en">
@@ -39,10 +40,14 @@ public class App extends Application {
                         <script>hljs.highlightAll();</script>
                         </body>
                         </html>
-                                                """,
-                CodeType.HTML, Theme.INTELLIJ_LIGHT);
+                                                """)
+                .codeType(CodeType.HTML)
+            .theme(Theme.INTELLIJ_LIGHT)
+                .build();
 
-        BlockCode blockCodeJavascript = new BlockCode(
+        BlockCode blockCodeJavascript = new BlockCode()
+                .codeType(CodeType.JAVASCRIPT)
+                .content(
                 """
                             function deepFreeze(obj) {
                             if (obj instanceof Map) {
@@ -69,32 +74,32 @@ public class App extends Application {
 
                             return obj;
                         }
-                                                """,
-                CodeType.JAVASCRIPT);
+                                                """)
+                .build();
 
-        BlockCode blockCode = new BlockCode(
+        BlockCode blockCode = new BlockCode()
+                .content(
                 """
-                                @Override
-                                    protected Skin<?> createDefaultSkin() {
-                                        return new BlockCodeViewSkin(this);
-                                    }
+                        @Override
+                        protected Skin<?> createDefaultSkin() {
+                            return new BlockCodeViewSkin(this);
+                        }
 
-                                    public String getText() {
-                                        return text.get();
-                                    }
+                        public String getText() {
+                            return text.get();
+                        }
 
-                                    public StringProperty textProperty() {
-                                        return text;
-                                    }
+                        public StringProperty textProperty() {
+                            return text;
+                        }
 
-                                    public void setText(String text) {
-                                        this.text.set(text);
-                                    }
+                        public void setText(String text) {
+                            this.text.set(text);
+                        }
                         """
-        );
-//        BlockCodeView blockCodeView = new BlockCodeView(FXCollections.observableArrayList(blockCode));
+        ).build();
 
-        BlockCodeDeclarative declarative = new BlockCodeDeclarative();
+        BlockCode declarative = new BlockCode();
         declarative
                 .codeType(CodeType.JAVA)
                 .theme(Theme.$3024)
@@ -110,7 +115,7 @@ public class App extends Application {
         Tab tabJavascript = new Tab("java", blockCodeJavascript);
         Tab tabCodeHtml = new Tab("java", blockCodeHtml);
         Tab deck = new Tab("Declarative Style", declarative);
-        TabPane tabView = new TabPane(tab, tabJavascript, tabCodeHtml, deck);
+        TabPane tabView = new TabPane(tab);
 
         Scene scene = new Scene(tabView, 800, 600);
         stage.setTitle("Hello!");
