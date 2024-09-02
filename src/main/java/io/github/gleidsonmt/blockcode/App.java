@@ -100,13 +100,25 @@ public class App extends Application {
                 """);
         declarative.build();
 
-        Tab tab = new Tab("java", blockCode);
-        Tab tabJavascript = new Tab("java", blockCodeJavascript);
-        Tab tabCodeHtml = new Tab("java", blockCodeHtml);
-        Tab deck = new Tab("Declarative Style", declarative);
-        TabPane tabView = new TabPane(tab);
+//        Tab tab = new Tab("java", blockCode);
+//        Tab tabJavascript = new Tab("java", blockCodeJavascript);
+//        Tab tabCodeHtml = new Tab("java", blockCodeHtml);
+//        Tab deck = new Tab("Declarative Style", declarative);
+//        TabPane tabView = new TabPane(tab);
+//        tabView.getTabs()
 
-        Scene scene = new Scene(tabView, 800, 600);
+        BlockCodeView blockCodeView = new BlockCodeView();
+        blockCodeView.setJavaCode("Button code = new Button(\"Button\")'");
+        blockCodeView.setFXMLCode("<Button>Button</Button>");
+        blockCodeView.setCssCode("""
+.button {
+    -fx-background-color: red;
+    -fx-border-color: red;
+    -fx-font-size: 12pt;
+}
+                """);
+
+        Scene scene = new Scene(blockCodeView, 800, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

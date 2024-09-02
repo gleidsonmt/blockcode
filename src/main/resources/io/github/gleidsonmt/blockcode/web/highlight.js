@@ -2568,7 +2568,6 @@ var hljs = (function () {
 
     // export an "instance" of the highlighter
     var highlight = HLJS({});
-
     return highlight;
 
 })();

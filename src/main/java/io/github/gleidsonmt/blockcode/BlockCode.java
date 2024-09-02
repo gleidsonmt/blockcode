@@ -25,6 +25,8 @@ public class BlockCode extends StackPane {
 
     public BlockCode() {
         this.setMinHeight(150);
+        this.setAlignment(Pos.TOP_RIGHT);
+
     }
 
     public BlockCode theme(Theme _theme) {
@@ -67,7 +69,6 @@ public class BlockCode extends StackPane {
     }
 
     public BlockCode build() {
-        this.setAlignment(Pos.TOP_RIGHT);
         WebView webView = new WebView();
         webView.setContextMenuEnabled(false);
         webView.getEngine().setJavaScriptEnabled(true);
@@ -85,6 +86,8 @@ public class BlockCode extends StackPane {
                             String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
                             link.setHref("styles/"+ them +".min.css");
 
+                            System.out.println("language-" + codeType.toString().toLowerCase());
+
                             Element el = doc.getElementById("block");
 
                             el.setTextContent(content);
@@ -96,7 +99,7 @@ public class BlockCode extends StackPane {
                 });
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
-        this.getChildren().add(webView);
+        this.getChildren().setAll(webView);
         return this;
     }
 }
