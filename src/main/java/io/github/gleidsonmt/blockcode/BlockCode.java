@@ -22,11 +22,9 @@ public class BlockCode extends StackPane {
     private CodeType codeType = CodeType.JAVA;
     private String content;
 
-
     public BlockCode() {
         this.setMinHeight(150);
         this.setAlignment(Pos.TOP_RIGHT);
-
     }
 
     public BlockCode theme(Theme _theme) {
@@ -85,8 +83,6 @@ public class BlockCode extends StackPane {
 
                             String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
                             link.setHref("styles/"+ them +".min.css");
-
-                            System.out.println("language-" + codeType.toString().toLowerCase());
 
                             Element el = doc.getElementById("block");
 
