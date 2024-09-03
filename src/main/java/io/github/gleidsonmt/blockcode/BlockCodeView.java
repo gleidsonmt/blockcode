@@ -1,11 +1,14 @@
 package io.github.gleidsonmt.blockcode;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+
+import javax.swing.*;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -17,7 +20,7 @@ public class BlockCodeView extends TabPane {
     private final BlockCode blockFXML;
     private final BlockCode blockCSS;
 
-    private ActionEvent onCopying = new ActionEvent(this, this);
+    private EventHandler<ActionEvent> onCopying;
 
     public BlockCodeView() {
         this(Theme.GITHUB);
@@ -68,6 +71,7 @@ public class BlockCodeView extends TabPane {
 
     private Button createCopyButton(BlockCode code) {
         Button btn = new Button("Copy");
+        btn.getStyleClass().add("copy-button");
         btn.setOnAction(event -> {
 
             ClipboardContent content = new ClipboardContent();
@@ -75,9 +79,8 @@ public class BlockCodeView extends TabPane {
             content.putHtml("<b>Bold</b> text");
             Clipboard.getSystemClipboard().setContent(content);
 
-            this.fireEvent(onCopying);
-
-            System.out.println("System.getProperties().get(\"content\") = " + System.getProperties().get("content"));
+            onCopying.handle(new ActionEvent(this, this));
+//            this.fireEvent(onCopying);
 
 //            context .createSnackBar()
 //                    .icon(new IconContainer(Icons.DONE))
@@ -88,5 +91,7 @@ public class BlockCodeView extends TabPane {
         return btn;
     }
 
-
+    public void setOnCopying(EventHandler<ActionEvent> onCopying) {
+        this.onCopying = onCopying;
+    }
 }
