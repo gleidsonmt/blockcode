@@ -79,7 +79,8 @@ public class BlockCodeView extends TabPane {
             content.putHtml("<b>Bold</b> text");
             Clipboard.getSystemClipboard().setContent(content);
 
-            onCopying.handle(new ActionEvent(this, this));
+            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
+
 //            this.fireEvent(onCopying);
 
 //            context .createSnackBar()
