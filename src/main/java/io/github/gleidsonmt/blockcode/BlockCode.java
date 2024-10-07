@@ -12,6 +12,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.web.WebView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -118,7 +119,8 @@ public class BlockCode extends StackPane {
         WebView webView = new WebView();
         webView.setContextMenuEnabled(false);
         webView.getEngine().setJavaScriptEnabled(true);
-
+        webView.setFontSmoothingType(FontSmoothingType.LCD);
+        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
 
         webView.getEngine().getLoadWorker().stateProperty()
