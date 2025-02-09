@@ -99,14 +99,6 @@ public class BlockCode extends StackPane {
             Clipboard.getSystemClipboard().setContent(content);
 
             if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
-
-//            this.fireEvent(onCopying);
-
-//            context .createSnackBar()
-//                    .icon(new IconContainer(Icons.DONE))
-//                    .color(SnackColors.SUCCESS)
-//                    .message("Copied!")
-//                    .show();
         });
         return btn;
     }
