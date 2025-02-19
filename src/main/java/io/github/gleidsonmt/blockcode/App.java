@@ -129,12 +129,15 @@ public class App
             }
             """);
 
-        Scene scene = new Scene(block, 800, 600);
+        block.setOnCopying(e -> {
+            System.out.println("e = " + e);
+        });
+
+        Scene scene = new Scene(blockCode, 800, 600);
         stage.setTitle("BlockCode!");
         stage.setScene(scene);
         stage.show();
 
-//        ScenicView.show(stage.getScene());
     }
 
     public static void main(String[] args) {

@@ -74,4 +74,18 @@ Block code is a simple web view (javafx) that implements a highlight in its cont
   <img src="./example_block_code_view.png" />
 </p>
 
+### Setting copy event
+```java
+block.setOnCopying(e -> {
+        ...
+});
+```
+
+### Styling copy button
+```css
+.copy-button {
+    ...
+}
+
+```
 

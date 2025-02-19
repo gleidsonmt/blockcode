@@ -1,6 +1,7 @@
 package io.github.gleidsonmt.blockcode;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +15,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.FontSmoothingType;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -142,8 +144,6 @@ public class BlockCode extends StackPane {
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
-
-                        Platform.runLater(() -> {
                             if (!content.isEmpty() && !content.isBlank()) {
                                 Document doc = webView.getEngine().getDocument();
 
@@ -157,15 +157,37 @@ public class BlockCode extends StackPane {
                                 el.setTextContent(content);
                                 el.setAttribute("class", "language-" + codeType.toString().toLowerCase());
 
-                                webView.getEngine().executeScript("hljs.highlightAll();");
+//                                Platform.requestNextPulse();
+//                                Platform.runLater(() -> {
+                                    webView.getEngine().executeScript("hljs.highlightAll();");
+//                                });
+
+//                                    engine.executeScript("hljs.highlightAll();");
+//                                    System.out.println("webView = " + webView.getEngine().executeScript("hljs.highlightAll();"));
 
                             }
-                        });
                     }
                 });
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
         this.getChildren().setAll(webView, createCopyButton());
         return this;
+    }
+
+    private void recurse(WebEngine engine) {
+//        new Thread(new Task<>() {
+//            @Override
+//            protected Object call() throws Exception {
+//                Platform.runLater(() -> {
+//                    engine.executeScript("hljs.highlightAll();");
+//                });
+//                return null;
+//            }
+//
+//            @Override
+//            protected void failed() {
+//                recurse(engine);
+//            }
+//        }).start();
     }
 }
