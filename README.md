@@ -1,17 +1,16 @@
 # Block code for JavaFx examples
 
- This code use an adaption from https://highlightjs.org/
+This code use an adaption from https://highlightjs.org/
 <br>
 Block code is a simple web view (javafx) that implements a highlight in its content.
 
 🧬
 ```
 |-- BlockCode (StackPane) 
-  |-- web   (WebView)
+  |-- Code   (WebView)
   
 ```
-### Example
-    
+### 👾 Example
 
 ```java
     // Imperative style
@@ -30,7 +29,26 @@ Block code is a simple web view (javafx) that implements a highlight in its cont
             .codeType(CodeType.JAVASCRIPT)
             .content("function hello() { console.log('Hello') };")
             .build();
+```
+<p style="text-align: center">
+    <img src="./example_block_code.png"  alt="example_block_code"/>
+</p>
+
+```
+|-- BlockCodeView (TabPane)
+    |-- Tab (Tab) 'java'
+        |-- BlockCode (StackPane)
+            |-- Code   (WebView)
+    |-- Tab (Tab) 'FXML'
+        |-- BlockCode (StackPane)
+            |-- Code   (WebView)
+    |-- Tab (Tab) 'Css'
+        |-- BlockCode (StackPane)
+            |-- Code   (WebView)
     
+```
+### 👾 Example
+```java
     // Or using tabs
     BlockCodeView block = new BlockCodeView();
     block.setJavaCode("""
@@ -51,11 +69,9 @@ Block code is a simple web view (javafx) that implements a highlight in its cont
             }
             """);
 ```
-
-### More
-
-
-### Result
-  <img src="./screenshot.png"  />
+### 🎆 The Result
+<p style="text-align: center">
+  <img src="./example_block_code_view.png" />
+</p>
 
 

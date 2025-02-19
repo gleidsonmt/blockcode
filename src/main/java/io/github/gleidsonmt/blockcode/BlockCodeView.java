@@ -44,11 +44,11 @@ public class BlockCodeView extends TabPane {
 
         this.getTabs().setAll(java, fxml, css);
 
-        for (Tab tab : this.getTabs()) {
-            if (tab.getContent() instanceof BlockCode block) {
-                block.getChildren().add(createCopyButton(block));
-            }
-        }
+//        for (Tab tab : this.getTabs()) {
+//            if (tab.getContent() instanceof BlockCode block) {
+////                block.getChildren().add(createCopyButton(block));
+//            }
+//        }
     }
 
     public void setJavaCode(String javaCode) {
@@ -69,20 +69,20 @@ public class BlockCodeView extends TabPane {
         return tab;
     }
 
-    private Button createCopyButton(BlockCode code) {
-        Button btn = new Button("Copy");
-        btn.getStyleClass().add("copy-button");
-        btn.setOnAction(event -> {
-
-            ClipboardContent content = new ClipboardContent();
-            content.putString(code.getContent());
-            content.putHtml("<b>Bold</b> text");
-            Clipboard.getSystemClipboard().setContent(content);
-
-            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
-        });
-        return btn;
-    }
+//    private Button createCopyButton(BlockCode code) {
+//        Button btn = new Button("Copy");
+//        btn.getStyleClass().add("copy-button");
+//        btn.setOnAction(event -> {
+//
+//            ClipboardContent content = new ClipboardContent();
+//            content.putString(code.getContent());
+//            content.putHtml("<b>Bold</b> text");
+//            Clipboard.getSystemClipboard().setContent(content);
+//
+//            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
+//        });
+//        return btn;
+//    }
 
     public void setOnCopying(EventHandler<ActionEvent> onCopying) {
         this.onCopying = onCopying;

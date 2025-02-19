@@ -110,8 +110,27 @@ public class App
                 }
                 """);
 
-        Scene scene = new Scene(blockCodeView, 800, 600);
-        stage.setTitle("Hello!");
+        BlockCodeView block = new BlockCodeView();
+        block.setJavaCode("""
+            Button button = new Button("Cancel");
+            """);
+
+        block.setFXMLCode("""
+            <Button text="button">
+                <graphic>
+                   <IconContainer icon="DISCOUNT"/>
+                </graphic>
+            </Button>
+            """);
+
+        block.setCssCode("""
+            .button {
+                -fx-accent: red;
+            }
+            """);
+
+        Scene scene = new Scene(block, 800, 600);
+        stage.setTitle("BlockCode!");
         stage.setScene(scene);
         stage.show();
 
