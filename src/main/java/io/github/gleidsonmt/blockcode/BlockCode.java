@@ -135,10 +135,10 @@ public class BlockCode extends StackPane {
 
     public BlockCode build() {
         WebView webView = new WebView();
-        webView.setContextMenuEnabled(false);
-        webView.getEngine().setJavaScriptEnabled(true);
+//        webView.setContextMenuEnabled(false);
+//        webView.getEngine().setJavaScriptEnabled(true);
         webView.setFontSmoothingType(FontSmoothingType.LCD);
-        webView.setMouseTransparent(true);
+//        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
 
         webView.getEngine().getLoadWorker().stateProperty()
