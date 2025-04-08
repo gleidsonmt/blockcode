@@ -129,9 +129,7 @@ public class App
             }
             """);
 
-        block.setOnCopying(e -> {
-            System.out.println("e = " + e);
-        });
+
 
         Scene scene = new Scene(blockCode, 800, 600);
         stage.setTitle("BlockCode!");
