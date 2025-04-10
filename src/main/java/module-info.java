@@ -1,4 +1,4 @@
-module io.github.gleidsonmt.blockcode {
+moduleImpl io.github.gleidsonmt.blockcode {
     requires transitive javafx.controls;
     requires transitive javafx.fxml;
     requires transitive javafx.web;
