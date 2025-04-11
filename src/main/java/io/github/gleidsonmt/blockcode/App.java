@@ -2,6 +2,7 @@ package io.github.gleidsonmt.blockcode;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -84,6 +85,16 @@ public class App
                                 function hello() {
                                     console.log('Hello')
                                 };
+                                
+                                function hello() {
+                                    console.log('Hello')
+                                };
+                                function hello() {
+                                    console.log('Hello')
+                                };
+                                function hello() {
+                                    console.log('Hello')
+                                };
                                 """
                 ).build();
 
@@ -131,7 +142,7 @@ public class App
 
 
 
-        Scene scene = new Scene(blockCode, 800, 600);
+        Scene scene = new Scene(new VBox(blockCode, block), 800, 600);
         stage.setTitle("BlockCode!");
         stage.setScene(scene);
         stage.show();

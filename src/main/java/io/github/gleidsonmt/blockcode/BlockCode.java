@@ -1,21 +1,15 @@
 package io.github.gleidsonmt.blockcode;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.text.FontSmoothingType;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -104,38 +98,13 @@ public class BlockCode extends StackPane {
         return this.copyButton;
     }
 
-//    private Button createCopyButton() {
-//        SVGPath icon = new SVGPath();
-//        icon.setContent("M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z");
-//        icon.getStyleClass().add("icon");
-//        Button copyButton = new Button("Copy");
-//        copyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-//        Group group = new Group(icon);
-//        icon.setScaleX(0.03);
-//        icon.setScaleY(0.03);
-//        copyButton.setGraphic(group);
-//        copyButton.getStyleClass().add("copy-button");
-//        copyButton.getStyleClass().add("copyButton-flat");
-//        StackPane.setMargin(copyButton, new Insets(10));
-//        copyButton.setOnAction(event -> {
-//
-//            ClipboardContent content = new ClipboardContent();
-//            content.putString(this.getContent());
-//            content.putHtml("<b>Bold</b> text");
-//            Clipboard.getSystemClipboard().setContent(content);
-//
-//            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
-//        });
-//        return copyButton;
-//    }
-
     public void setOnCopying(EventHandler<ActionEvent> onCopying) {
         this.onCopying = onCopying;
     }
 
     public BlockCode build() {
         WebView webView = new WebView();
-//        webView.setContextMenuEnabled(false);
+        webView.setContextMenuEnabled(false);
 //        webView.getEngine().setJavaScriptEnabled(true);
         webView.setFontSmoothingType(FontSmoothingType.LCD);
 //        webView.setMouseTransparent(true);
@@ -144,50 +113,30 @@ public class BlockCode extends StackPane {
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
-                            if (!content.isEmpty() && !content.isBlank()) {
-                                Document doc = webView.getEngine().getDocument();
+                        if (!content.isEmpty() && !content.isBlank()) {
+                            Document doc = webView.getEngine().getDocument();
 
-                                HTMLLinkElement link = (HTMLLinkElement) doc.getElementById("style");
+                            HTMLLinkElement link = (HTMLLinkElement) doc.getElementById("style");
 
-                                String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
-                                link.setHref("styles/"+ them +".min.css");
+                            String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
+                            link.setHref("styles/" + them + ".min.css");
 
-                                Element el = doc.getElementById("block");
+                            Element el = doc.getElementById("block");
 
-                                el.setTextContent(content);
-                                el.setAttribute("class", "language-" + codeType.toString().toLowerCase());
+                            el.setTextContent(content);
+                            el.setAttribute("class", "language-" + codeType.toString().toLowerCase());
 
 //                                Platform.requestNextPulse();
 //                                Platform.runLater(() -> {
-                                    webView.getEngine().executeScript("hljs.highlightAll();");
+                            webView.getEngine().executeScript("hljs.highlightAll();");
 //                                });
 
-//                                    engine.executeScript("hljs.highlightAll();");
-//                                    System.out.println("webView = " + webView.getEngine().executeScript("hljs.highlightAll();"));
-
-                            }
+                        }
                     }
                 });
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
         this.getChildren().setAll(webView, createCopyButton());
         return this;
-    }
-
-    private void recurse(WebEngine engine) {
-//        new Thread(new Task<>() {
-//            @Override
-//            protected Object call() throws Exception {
-//                Platform.runLater(() -> {
-//                    engine.executeScript("hljs.highlightAll();");
-//                });
-//                return null;
-//            }
-//
-//            @Override
-//            protected void failed() {
-//                recurse(engine);
-//            }
-//        }).start();
     }
 }
