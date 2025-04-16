@@ -30,7 +30,18 @@ public class BlockCode extends StackPane {
     private String content;
     private Button copyButton;
 
-    private EventHandler<ActionEvent> onCopying;
+    private EventHandler<ActionEvent> onCopying = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            ClipboardContent content = new ClipboardContent();
+            content.putString(getContent());
+            content.putHtml("<b>Bold</b> text");
+            Clipboard.getSystemClipboard().setContent(content);
+
+            if (onCopying != null) onCopying.handle(new ActionEvent(this, BlockCode.this));
+            copyButton.setText("Copied!");
+        }
+    };
 
     public BlockCode() {
         this.setMinHeight(150);
@@ -76,18 +87,7 @@ public class BlockCode extends StackPane {
         this.content = content;
     }
 
-    protected EventHandler<ActionEvent> copyAction = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            ClipboardContent content = new ClipboardContent();
-            content.putString(getContent());
-            content.putHtml("<b>Bold</b> text");
-            Clipboard.getSystemClipboard().setContent(content);
 
-            if (onCopying != null) onCopying.handle(new ActionEvent(this, BlockCode.this));
-            copyButton.setText("Copied!");
-        }
-    };
 
     protected Button createCopyButton() {
         copyButton = new Button("Copy");
@@ -111,9 +111,6 @@ public class BlockCode extends StackPane {
 //        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
         Font font = Font.loadFont(getClass().getResourceAsStream("font/JetBrains-Mono-Regular.ttf"), 12);
-
-//        webView.getEngine().setUserStyleSheetLocation("data:,body { font: 18px System Bold; }");
-//        webView.getEngine().setUserStyleSheetLocation(getClass().getResource("web/style.css").toExternalForm());
 
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
@@ -143,7 +140,7 @@ public class BlockCode extends StackPane {
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
         copyButton = createCopyButton();
-        copyButton.setOnAction(copyAction);
+        copyButton.setOnAction(onCopying);
         this.getChildren().setAll(webView, copyButton);
         return this;
     }
