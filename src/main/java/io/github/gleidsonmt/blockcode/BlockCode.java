@@ -37,8 +37,8 @@ public class BlockCode extends StackPane {
             content.putString(getContent());
             content.putHtml("<b>Bold</b> text");
             Clipboard.getSystemClipboard().setContent(content);
-
-            if (onCopying != null) onCopying.handle(new ActionEvent(this, BlockCode.this));
+//
+//            if (onCopying != null) onCopying.handle(new ActionEvent());
             copyButton.setText("Copied!");
         }
     };
@@ -60,6 +60,11 @@ public class BlockCode extends StackPane {
 
     public BlockCode content(String _content) {
         this.content = _content;
+        return this;
+    }
+
+    public BlockCode copy(Button button) {
+        this.copyButton = button;
         return this;
     }
 
@@ -139,7 +144,9 @@ public class BlockCode extends StackPane {
                 });
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
-        copyButton = createCopyButton();
+        if (copyButton == null) {
+            copyButton = createCopyButton();
+        }
         copyButton.setOnAction(onCopying);
         this.getChildren().setAll(webView, copyButton);
         return this;

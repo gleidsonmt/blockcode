@@ -2,6 +2,7 @@ package io.github.gleidsonmt.blockcode;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -78,9 +79,10 @@ public class App
                                 """)
                 .build();
 
-        CustomBlockCode blockCode = (CustomBlockCode) new CustomBlockCode()
+        BlockCode blockCode = new BlockCode()
                 .theme(Theme.GITHUB)
                 .codeType(CodeType.JAVASCRIPT)
+                .copy(new Button("Welcome"))
                 .content(
                         """
                                 function hello() {
