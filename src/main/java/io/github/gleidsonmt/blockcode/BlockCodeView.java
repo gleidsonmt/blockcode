@@ -2,18 +2,14 @@ package io.github.gleidsonmt.blockcode;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-
-import javax.swing.*;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  30/08/2024
  */
+@SuppressWarnings("unused")
 public class BlockCodeView extends TabPane {
 
     private final BlockCode blockJava;
@@ -44,23 +40,33 @@ public class BlockCodeView extends TabPane {
 
         this.getTabs().setAll(java, fxml, css);
 
-//        for (Tab tab : this.getTabs()) {
-//            if (tab.getContent() instanceof BlockCode block) {
-////                block.getChildren().add(createCopyButton(block));
-//            }
-//        }
     }
 
+    @Deprecated
     public void setJavaCode(String javaCode) {
         blockJava.setContent(javaCode);
     }
 
+    @Deprecated
     public void setFXMLCode(String javaCode) {
         blockFXML.setContent(javaCode);
     }
 
+    @Deprecated
     public void setCssCode(String cssCode) {
         blockCSS.setContent(cssCode);
+    }
+
+    public void setJava(String code) {
+        blockJava.setContent(code);
+    }
+
+    public void setCss(String code) {
+        blockCSS.setContent(code);
+    }
+
+    public void setFXML(String code) {
+        blockFXML.setContent(code);
     }
 
     private Tab createTab(String name) {
@@ -68,21 +74,6 @@ public class BlockCodeView extends TabPane {
         tab.setClosable(false);
         return tab;
     }
-
-//    private Button createCopyButton(BlockCode code) {
-//        Button btn = new Button("Copy");
-//        btn.getStyleClass().add("copy-button");
-//        btn.setOnAction(event -> {
-//
-//            ClipboardContent content = new ClipboardContent();
-//            content.putString(code.getContent());
-//            content.putHtml("<b>Bold</b> text");
-//            Clipboard.getSystemClipboard().setContent(content);
-//
-//            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
-//        });
-//        return btn;
-//    }
 
     public void setOnCopying(EventHandler<ActionEvent> onCopying) {
         this.onCopying = onCopying;

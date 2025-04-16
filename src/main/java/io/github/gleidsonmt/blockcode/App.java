@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class App
         extends Application {
@@ -77,7 +78,7 @@ public class App
                                 """)
                 .build();
 
-        BlockCode blockCode = new BlockCode()
+        CustomBlockCode blockCode = (CustomBlockCode) new CustomBlockCode()
                 .theme(Theme.GITHUB)
                 .codeType(CodeType.JAVASCRIPT)
                 .content(
@@ -143,6 +144,11 @@ public class App
 
 
         Scene scene = new Scene(new VBox(blockCode, block), 800, 600);
+//        scene.getStylesheets().addAll(
+//                Objects.requireNonNull(getClass().getResource("font/font.css")).toExternalForm(),
+//                Objects.requireNonNull(getClass().getResource("font/master.css")).toExternalForm()
+//
+//        );
         stage.setTitle("BlockCode!");
         stage.setScene(scene);
         stage.show();

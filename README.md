@@ -1,13 +1,21 @@
 # Block code for JavaFx examples
 
-This code use an adaption from https://highlightjs.org/
+This code uses an adaption from https://highlightjs.org/
 <br>
 Block code is a simple web view (javafx) that implements a highlight in its content.
 
+📰 2 — Now block code uses JetBrains Font (it's a specific font created to code).
+##### See it.
+![JetBrains Font](block.png)
+<br>
+📰 1 — Refactoring code to use javafx 20+
+
+
 🧬
 ```
-|-- BlockCode (StackPane) 
-  |-- Code   (WebView)
+| -- BlockCode          (StackPane) 
+  | -- Code             (WebView)
+  | -- Copy Action      (Button)
   
 ```
 ### 👾 Example
@@ -51,11 +59,11 @@ Block code is a simple web view (javafx) that implements a highlight in its cont
 ```java
     // Or using tabs
     BlockCodeView block = new BlockCodeView();
-    block.setJavaCode("""
+    block.setJava("""
             Button button = new Button("Cancel");
             """);
     
-    block.setFXMLCode("""
+    block.setFXML("""
             <Button text="button">
                 <graphic>
                    <IconContainer icon="DISCOUNT"/>
@@ -63,7 +71,7 @@ Block code is a simple web view (javafx) that implements a highlight in its cont
             </Button>
             """);
     
-    block.setCssCode("""
+    block.setCss("""
             .button {
                 -fx-accent: red;
             }
@@ -86,6 +94,15 @@ block.setOnCopying(e -> {
 .copy-button {
     ...
 }
+```
+Or
+```java
+public class CustomBlockCode extends BlockCode {
 
+    @Override
+    protected Button createCopyButton() {
+        return new Button("Copy 2");
+    }
+}
 ```
 

@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.FontSmoothingType;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,7 +29,6 @@ public class BlockCode extends StackPane {
     private CodeType codeType = CodeType.JAVA;
     private String content;
     private Button copyButton;
-
 
     private EventHandler<ActionEvent> onCopying;
 
@@ -77,20 +76,23 @@ public class BlockCode extends StackPane {
         this.content = content;
     }
 
-    private Button createCopyButton() {
-        copyButton = new Button("Copy");
-        copyButton.getStyleClass().add("copy-button");
-        StackPane.setMargin(copyButton, new Insets(20));
-        copyButton.setOnAction(event -> {
-
+    protected EventHandler<ActionEvent> copyAction = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
             ClipboardContent content = new ClipboardContent();
-            content.putString(this.getContent());
+            content.putString(getContent());
             content.putHtml("<b>Bold</b> text");
             Clipboard.getSystemClipboard().setContent(content);
 
-            if (onCopying != null) onCopying.handle(new ActionEvent(this, this));
+            if (onCopying != null) onCopying.handle(new ActionEvent(this, BlockCode.this));
             copyButton.setText("Copied!");
-        });
+        }
+    };
+
+    protected Button createCopyButton() {
+        copyButton = new Button("Copy");
+        copyButton.getStyleClass().add("copy-button");
+        StackPane.setMargin(copyButton, new Insets(20));
         return copyButton;
     }
 
@@ -106,9 +108,12 @@ public class BlockCode extends StackPane {
         WebView webView = new WebView();
         webView.setContextMenuEnabled(false);
 //        webView.getEngine().setJavaScriptEnabled(true);
-        webView.setFontSmoothingType(FontSmoothingType.LCD);
 //        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
+        Font font = Font.loadFont(getClass().getResourceAsStream("font/JetBrains-Mono-Regular.ttf"), 12);
+
+//        webView.getEngine().setUserStyleSheetLocation("data:,body { font: 18px System Bold; }");
+//        webView.getEngine().setUserStyleSheetLocation(getClass().getResource("web/style.css").toExternalForm());
 
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
@@ -117,6 +122,7 @@ public class BlockCode extends StackPane {
                             Document doc = webView.getEngine().getDocument();
 
                             HTMLLinkElement link = (HTMLLinkElement) doc.getElementById("style");
+
 
                             String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
                             link.setHref("styles/" + them + ".min.css");
@@ -136,7 +142,9 @@ public class BlockCode extends StackPane {
                 });
 
         webView.getEngine().load(Objects.requireNonNull(url).toExternalForm());
-        this.getChildren().setAll(webView, createCopyButton());
+        copyButton = createCopyButton();
+        copyButton.setOnAction(copyAction);
+        this.getChildren().setAll(webView, copyButton);
         return this;
     }
 }
