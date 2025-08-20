@@ -125,7 +125,6 @@ public class BlockCode extends StackPane {
 
                             HTMLLinkElement link = (HTMLLinkElement) doc.getElementById("style");
 
-
                             String them = theme.name().toLowerCase().replaceAll("_", "-").replaceAll("\\$", "");
                             link.setHref("styles/" + them + ".min.css");
 
