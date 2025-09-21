@@ -44,7 +44,7 @@ public class BlockCode extends StackPane {
     };
 
     public BlockCode() {
-        this.setMinHeight(150);
+        this.setMinHeight(300);
         this.setAlignment(Pos.TOP_RIGHT);
     }
 
