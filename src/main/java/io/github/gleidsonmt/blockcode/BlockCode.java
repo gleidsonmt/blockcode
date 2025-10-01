@@ -92,8 +92,6 @@ public class BlockCode extends StackPane {
         this.content = content;
     }
 
-
-
     protected Button createCopyButton() {
         copyButton = new Button("Copy");
         copyButton.getStyleClass().add("copy-button");
