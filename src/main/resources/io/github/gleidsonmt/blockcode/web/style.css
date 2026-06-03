@@ -1,3 +1,8 @@
+@font-face {
+    font-family: JetBrains Mono Regular;
+    src: url('JetBrains-Mono-Regular.ttf');
+}
+
 code {
-    font: 12px JetBrains Mono;
+    font: 12px "JetBrains Mono Regular";
 }
