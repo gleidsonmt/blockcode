@@ -113,9 +113,7 @@ public class BlockCode extends StackPane {
         webView.getEngine().setJavaScriptEnabled(true);
 //        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
-//        Font font = Font.loadFont(getClass().getResourceAsStream("font/JetBrains-Mono-Regular.ttf"), 12);
 
-        System.out.println(Font.getFontNames());
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
