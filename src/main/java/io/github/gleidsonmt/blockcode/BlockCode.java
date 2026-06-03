@@ -110,11 +110,12 @@ public class BlockCode extends StackPane {
     public BlockCode build() {
         WebView webView = new WebView();
         webView.setContextMenuEnabled(false);
-//        webView.getEngine().setJavaScriptEnabled(true);
+        webView.getEngine().setJavaScriptEnabled(true);
 //        webView.setMouseTransparent(true);
         URL url = App.class.getResource("web/index.html");
-        Font font = Font.loadFont(getClass().getResourceAsStream("font/JetBrains-Mono-Regular.ttf"), 12);
+//        Font font = Font.loadFont(getClass().getResourceAsStream("font/JetBrains-Mono-Regular.ttf"), 12);
 
+        System.out.println(Font.getFontNames());
         webView.getEngine().getLoadWorker().stateProperty()
                 .addListener((obs, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
@@ -144,6 +145,7 @@ public class BlockCode extends StackPane {
         if (copyButton == null) {
             copyButton = createCopyButton();
         }
+
         copyButton.setOnAction(onCopying);
         this.getChildren().setAll(webView, copyButton);
         return this;
