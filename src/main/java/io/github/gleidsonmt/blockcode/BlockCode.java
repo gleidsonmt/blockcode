@@ -44,7 +44,9 @@ public class BlockCode extends StackPane {
     };
 
     public BlockCode() {
-        this.setMinHeight(300);
+//        this.setMinHeight(100);
+        this.setPrefHeight(-1);
+        this.setMaxWidth(-1);
         this.setAlignment(Pos.TOP_RIGHT);
     }
 
@@ -136,6 +138,11 @@ public class BlockCode extends StackPane {
 //                                });
 
                         }
+
+                        this.setPrefHeight(-1);
+                        this.setMaxWidth(-1);
+
+                        StackPane.clearConstraints(webView);
                     }
                 });
 
@@ -146,6 +153,9 @@ public class BlockCode extends StackPane {
 
         copyButton.setOnAction(onCopying);
         this.getChildren().setAll(webView, copyButton);
+        setPrefHeight(-1);
+        setMaxHeight(-1);
+
         return this;
     }
 }
