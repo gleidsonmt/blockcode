@@ -44,6 +44,7 @@ public class BlockCode extends StackPane {
     };
 
     public BlockCode() {
+        getStyleClass().add("block-code");
 //        this.setMinHeight(100);
         this.setPrefHeight(-1);
         this.setMaxWidth(-1);
